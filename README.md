@@ -1,1 +1,1 @@
-![Cover](https://raw.githubusercontent.com/BosEriko/BosEriko/master/cover.png)
+![Cover](https://media.giphy.com/media/137EaR4vAOCn1S/giphy.gif)
