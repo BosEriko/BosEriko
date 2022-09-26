@@ -19,7 +19,7 @@
 ![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)
 ![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)
 
-![Cover](https://c.tenor.com/7LfXC60OyVkAAAAd/cyberpunk-cyberpunk-anime.gif)
+[![Cover](https://c.tenor.com/7LfXC60OyVkAAAAd/cyberpunk-cyberpunk-anime.gif)](https://www.youtube.com/watch?v=gzbLODUb1sA)
 
 ![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)
 ![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)
