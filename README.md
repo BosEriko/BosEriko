@@ -19,7 +19,7 @@
 [![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)](https://www.youtube.com/watch?v=gzbLODUb1sA)
 [![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)](https://www.youtube.com/watch?v=gzbLODUb1sA)
 
-[![Cover](https://c.tenor.com/7LfXC60OyVkAAAAd/cyberpunk-cyberpunk-anime.gif)](https://www.youtube.com/watch?v=gzbLODUb1sA)
+![coding-humor](https://user-images.githubusercontent.com/10940193/202503277-f25aaf8f-923e-43dc-a25e-9c8a0fe81bb0.gif)
 
 [![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)](https://www.youtube.com/watch?v=gzbLODUb1sA)
 [![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)](https://www.youtube.com/watch?v=gzbLODUb1sA)
