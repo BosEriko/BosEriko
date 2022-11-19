@@ -1,3 +1,5 @@
+[![@BosEriko's Holopin board](https://holopin.me/boseriko)](https://holopin.io/@boseriko)
+
 [![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)](https://www.youtube.com/watch?v=gzbLODUb1sA)
 [![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)](https://www.youtube.com/watch?v=gzbLODUb1sA)
 [![Cat](https://cdn.discordapp.com/emojis/740291184223584437.gif)](https://www.youtube.com/watch?v=gzbLODUb1sA)
