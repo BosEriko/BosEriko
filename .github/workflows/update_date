@@ -1,0 +1,16 @@
+name: Update README with current date
+on:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  build:
+    name: Update README files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Update README.md file
+        run: |
+          sed -i "s|<date>|$(date +'%Y-%m-%d')|g" README.md
