@@ -1,0 +1,92 @@
+{
+  "product": {
+    "title": "Product",
+    "description": "These are repositories that I work on constantly.",
+    "deviconClass": null,
+    "bg": null
+  },
+  "project": {
+    "title": "Project",
+    "description": "These are repositories that I work on every now and then.",
+    "deviconClass": null,
+    "bg": null
+  },
+  "typescript": {
+    "title": "TypeScript",
+    "description": "Repositories related to TypeScript.",
+    "deviconClass": "devicon-typescript-plain",
+    "bg": "#2563EB"
+  },
+  "ruby": {
+    "title": "Ruby",
+    "description": "Repositories related to Ruby.",
+    "deviconClass": "devicon-ruby-plain",
+    "bg": "#EF4444"
+  },
+  "elixir": {
+    "title": "Elixir",
+    "description": "Repositories related to Elixir.",
+    "deviconClass": "devicon-elixir-plain",
+    "bg": "#9333EA"
+  },
+  "php": {
+    "title": "PHP",
+    "description": "Repositories related to PHP.",
+    "deviconClass": "devicon-php-plain",
+    "bg": "#3B82F6"
+  },
+  "react": {
+    "title": "React",
+    "description": "Repositories related to React.",
+    "deviconClass": "devicon-react-original",
+    "bg": "#22D3EE"
+  },
+  "nextjs": {
+    "title": "Next.js",
+    "description": "Repositories related to Next.js.",
+    "deviconClass": "devicon-nextjs-plain",
+    "bg": "#111827"
+  },
+  "nodejs": {
+    "title": "Node.js",
+    "description": "Repositories related to Node.js.",
+    "deviconClass": "devicon-nodejs-plain",
+    "bg": "#16A34A"
+  },
+  "rails": {
+    "title": "Rails",
+    "description": "Repositories related to Rails.",
+    "deviconClass": "devicon-rails-plain",
+    "bg": "#DC2626"
+  },
+  "graphql": {
+    "title": "GraphQL",
+    "description": "Repositories related to GraphQL.",
+    "deviconClass": "devicon-graphql-plain",
+    "bg": "#EC4899"
+  },
+  "docker": {
+    "title": "Docker",
+    "description": "Repositories related to Docker.",
+    "deviconClass": "devicon-docker-plain",
+    "bg": "#38BDF8"
+  },
+  "tailwind": {
+    "title": "Tailwind",
+    "description": "Repositories related to Tailwind.",
+    "deviconClass": "devicon-tailwindcss-plain",
+    "bg": "#2DD4BF"
+  },
+  "postgresql": {
+    "title": "PostgreSQL",
+    "description": "Repositories related to PostgreSQL.",
+    "deviconClass": "devicon-postgresql-plain",
+    "bg": "#1E40AF"
+  },
+  "mysql": {
+    "title": "MySQL",
+    "description": "Repositories related to MySQL.",
+    "deviconClass": "devicon-mysql-plain",
+    "bg": "#2563EB"
+  }
+}
