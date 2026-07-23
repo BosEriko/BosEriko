@@ -33,5 +33,5 @@ jobs:
           git config user.name "BosEriko"
           git config user.email "bos@eriko.ph"
           git add topic-count.json last-sync
-          git commit -m "Update topic counts" || echo "No changes"
+          git commit -m ":recycle: Update topic counts" || echo ":recycle: No changes"
           git push
