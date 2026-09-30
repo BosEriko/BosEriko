@@ -4,10 +4,10 @@
     "company": "Uni-Tech",
     "date": {
       "start": 1783296000000,
-      "end": null
+      "end": 1789344000000
     },
     "location": "Remote",
-    "active": true,
+    "active": false,
     "hidden": true,
     "responsibilities": [
       "Maintained and enhanced a NodeJS back-end application.",
@@ -25,7 +25,7 @@
     },
     "location": "Remote",
     "active": true,
-    "hidden": false,
+    "hidden": true,
     "responsibilities": [
       "Maintained and enhanced a NestJS back-end application.",
       "Built and optimized a NextJS front-end interface for seamless usability.",
