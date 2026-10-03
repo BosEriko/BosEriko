@@ -88,5 +88,11 @@
     "description": "Repositories related to MySQL.",
     "deviconClass": "devicon-mysql-plain",
     "bg": "#2563EB"
+  },
+  "nestjs": {
+    "title": "NestJS",
+    "description": "Repositories related to NestJS.",
+    "deviconClass": "devicon-nestjs-original",
+    "bg": "#E0234E"
   }
 }
