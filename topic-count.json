@@ -2,7 +2,7 @@
   "typescript": 4,
   "react": 4,
   "nextjs": 4,
-  "nodejs": 4,
-  "tailwind": 4,
-  "docker": 3
+  "nodejs": 3,
+  "docker": 2,
+  "tailwind": 2
 }
