@@ -94,5 +94,11 @@
     "description": "Repositories related to NestJS.",
     "deviconClass": "devicon-nestjs-original",
     "bg": "#E0234E"
+  },
+  "firebase": {
+    "title": "Firebase",
+    "description": "Repositories related to Firebase.",
+    "deviconClass": "devicon-firebase-plain",
+    "bg": "#F59E0B"
   }
 }
