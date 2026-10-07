@@ -1,11 +1,11 @@
-name: Update Topic Count
+name: Update Banner
 
 permissions:
   contents: write
 
 on:
   schedule:
-    - cron: "0 12 * * 1-6"
+    - cron: "0 12 * * 0"
   workflow_dispatch:
 
 jobs:
@@ -20,18 +20,17 @@ jobs:
           node-version: 20
 
       - name: Install deps
-        run: npm install node-fetch@3
+        run: npm install puppeteer@24
 
-      - name: Run counter
+      - name: Generate banner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_USERNAME: BosEriko
-        run: node scripts/count-topics.mjs
+        run: node scripts/generate-banner.mjs
 
       - name: Commit changes
         run: |
           git config user.name "BosEriko"
           git config user.email "bos@eriko.ph"
-          git add topic-count.json last-sync
-          git commit -m ":recycle: Update topic counts" || echo ":recycle: No changes"
+          git add banner.png
+          git commit -m ":art: Update banner" || echo ":art: No changes"
           git push
