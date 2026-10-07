@@ -6,6 +6,10 @@ const token = process.env.GITHUB_TOKEN;
 
 const topics = JSON.parse(fs.readFileSync("topics.json", "utf-8"));
 const counts = JSON.parse(fs.readFileSync("topic-count.json", "utf-8"));
+const links = JSON.parse(fs.readFileSync("links.json", "utf-8"));
+const packages = JSON.parse(fs.readFileSync("packages.json", "utf-8"));
+const gems = JSON.parse(fs.readFileSync("gems.json", "utf-8"));
+const contributions = JSON.parse(fs.readFileSync("contributions.json", "utf-8"));
 
 const headers = {
   Accept: "application/vnd.github+json",
@@ -19,16 +23,16 @@ const escapeHtml = (value) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
-async function fetchLatestRepo(topic) {
+async function fetchLatestRepos(topic, limit) {
   const res = await fetch(
-    `https://api.github.com/search/repositories?q=user:${username}+topic:${topic}&sort=updated&order=desc&per_page=1`,
+    `https://api.github.com/search/repositories?q=user:${username}+topic:${topic}&sort=updated&order=desc&per_page=${limit}`,
     { headers }
   );
 
-  if (!res.ok) return null;
+  if (!res.ok) return [];
 
   const data = await res.json();
-  return data.items?.[0] ?? null;
+  return data.items ?? [];
 }
 
 async function resolveCover(repo) {
@@ -67,11 +71,44 @@ const renderCard = async (label, repo) => {
     </div>`;
 };
 
+const renderRepoList = (repos) =>
+  repos
+    .map((repo) => `- **[${repo.name}](${repo.html_url})**${repo.description ? ` — ${escapeHtml(repo.description)}` : ""}`)
+    .join("\n");
+
+const renderReadme = (products, projects, today) => {
+  const topicLinks = Object.entries(counts)
+    .filter(([topic]) => topics[topic])
+    .map(([topic, count]) => `[${topics[topic].title}](https://boseriko.com/topic/${topic}) (${count})`)
+    .join(" · ");
+
+  const openSource = [
+    packages.length && `- **npm:** ${packages.map(({ name, link }) => `[${name}](${link})`).join(" · ")}`,
+    gems.length && `- **RubyGems:** ${gems.map(({ name, link }) => `[${name}](${link})`).join(" · ")}`,
+    contributions.length && `- **Contributions:** ${contributions.map(({ name, link, author }) => `[${author.name}/${name}](${link})`).join(" · ")}`,
+  ].filter(Boolean);
+
+  const sections = [
+    `<a href="https://boseriko.com"><img src="banner.png" alt="Bos Eriko — boseriko.com" /></a>`,
+    `### Hey, I'm Bos Eriko`,
+    `A software engineer who likes anime and streaming. See everything I build at **[boseriko.com](https://boseriko.com)** or read my **[resume](https://boseriko.com/resume)**.`,
+    products.length && `#### Latest products\n\n${renderRepoList(products)}`,
+    projects.length && `#### Latest projects\n\n${renderRepoList(projects)}`,
+    topicLinks && `#### Things I work with\n\n${topicLinks}`,
+    openSource.length && `#### Open source\n\n${openSource.join("\n")}`,
+    links.length && `#### Connect\n\n${links.map(({ name, url }) => `[${name}](${url})`).join(" · ")}`,
+    `<sub>Updated weekly by GitHub Actions · ${today}</sub>`,
+  ];
+
+  return `${sections.filter(Boolean).join("\n\n")}\n`;
+};
+
 async function main() {
-  const [product, project] = await Promise.all([
-    fetchLatestRepo("product"),
-    fetchLatestRepo("project"),
+  const [products, projects] = await Promise.all([
+    fetchLatestRepos("product", 3),
+    fetchLatestRepos("project", 3),
   ]);
+  const [product, project] = [products[0], projects[0]];
 
   const pills = Object.entries(counts).filter(([topic]) => topics[topic]).map(renderPill).join("");
   const cards = (await Promise.all([renderCard("product", product), renderCard("project", project)])).join("");
@@ -165,10 +202,7 @@ async function main() {
 
   console.log("Updated banner.png");
 
-  fs.writeFileSync(
-    "README.md",
-    `<a href="https://boseriko.com"><img src="banner.png" alt="boseriko.com" /></a>\n`
-  );
+  fs.writeFileSync("README.md", renderReadme(products, projects, today));
   console.log("Updated README.md");
 }
 

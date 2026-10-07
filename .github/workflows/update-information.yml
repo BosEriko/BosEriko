@@ -1,4 +1,4 @@
-name: Update Banner
+name: Update Information
 
 permissions:
   contents: write
@@ -22,15 +22,15 @@ jobs:
       - name: Install deps
         run: npm install puppeteer@24
 
-      - name: Generate banner
+      - name: Generate information
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/generate-banner.mjs
+        run: node scripts/generate-information.mjs
 
       - name: Commit changes
         run: |
           git config user.name "BosEriko"
           git config user.email "bos@eriko.ph"
           git add banner.png README.md
-          git commit -m ":art: Update banner" || echo ":art: No changes"
+          git commit -m ":art: Update information" || echo ":art: No changes"
           git push
