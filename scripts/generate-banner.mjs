@@ -171,6 +171,12 @@ async function main() {
   await browser.close();
 
   console.log("Updated banner.png");
+
+  fs.writeFileSync(
+    "README.md",
+    `<a href="https://boseriko.com"><img src="banner.png" alt="boseriko.com" /></a>\n`
+  );
+  console.log("Updated README.md");
 }
 
 main();

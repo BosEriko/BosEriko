@@ -31,6 +31,6 @@ jobs:
         run: |
           git config user.name "BosEriko"
           git config user.email "bos@eriko.ph"
-          git add banner.png
+          git add banner.png README.md
           git commit -m ":art: Update banner" || echo ":art: No changes"
           git push
