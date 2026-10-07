@@ -102,21 +102,21 @@ async function main() {
   }
   * { box-sizing: border-box; margin: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-  #banner { position: relative; width: 1500px; height: 500px; padding: 48px 64px 88px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 64px; background: var(--paper); overflow: hidden; }
+  #banner { position: relative; width: 1500px; height: 360px; padding: 28px 56px 64px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 48px; background: var(--paper); overflow: hidden; }
   .eyebrow { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
   .intro .eyebrow { display: flex; align-items: center; gap: 12px; }
   .logo { width: 28px; height: 28px; }
-  h1 { margin-top: 14px; font-family: var(--serif); font-weight: 400; font-size: 96px; line-height: 0.9; letter-spacing: -0.02em; }
+  h1 { margin-top: 10px; font-family: var(--serif); font-weight: 400; font-size: 72px; line-height: 0.9; letter-spacing: -0.02em; }
   h1 em { color: var(--brand-deep); }
-  .tagline { margin-top: 16px; font-size: 20px; line-height: 1.5; color: var(--ink-soft); }
+  .tagline { margin-top: 10px; font-size: 18px; line-height: 1.5; color: var(--ink-soft); }
   .highlight { color: var(--ink); background: linear-gradient(transparent 58%, var(--brand) 58%, var(--brand) 92%, transparent 92%); padding: 0 0.1em; }
-  .pills { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pills { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
   .pill { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 2px; padding: 5px 5px 5px 9px; font-family: var(--mono); font-size: 12px; color: var(--ink-soft); }
   .pill i { font-size: 14px; }
   .count { background: var(--paper-deep); border-radius: 2px; padding: 2px 6px; font-size: 10px; color: var(--muted); }
-  .cards { display: flex; gap: 40px; }
-  .card { width: 300px; }
-  .card .eyebrow { margin-bottom: 10px; }
+  .cards { display: flex; gap: 32px; }
+  .card { width: 250px; }
+  .card .eyebrow { margin-bottom: 8px; }
   .window { border: 2px solid var(--ink); border-radius: 2px; background: var(--ink); box-shadow: 8px 8px 0 var(--brand); }
   .bar { display: flex; align-items: center; gap: 6px; padding: 8px 10px; }
   .dot { width: 6px; height: 6px; background: rgb(246 241 231 / 0.25); }
@@ -124,8 +124,8 @@ async function main() {
   .label { margin-left: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; color: rgb(246 241 231 / 0.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .cover { aspect-ratio: 2 / 1; overflow: hidden; background: var(--paper-deep); }
   .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  h2 { margin-top: 18px; font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .footer { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; padding: 0 64px; display: flex; align-items: center; justify-content: space-between; background: var(--ink); font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(246 241 231 / 0.6); }
+  h2 { margin-top: 14px; font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .footer { position: absolute; left: 0; right: 0; bottom: 0; height: 36px; padding: 0 56px; display: flex; align-items: center; justify-content: space-between; background: var(--ink); font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(246 241 231 / 0.6); }
   .footer strong { color: var(--brand); font-weight: 400; }
 </style>
 </head>
@@ -155,7 +155,7 @@ async function main() {
 
   const browser = await puppeteer.launch({ args: ["--no-sandbox", "--disable-setuid-sandbox"] });
   const page = await browser.newPage();
-  await page.setViewport({ width: 1500, height: 500, deviceScaleFactor: 2 });
+  await page.setViewport({ width: 1500, height: 360, deviceScaleFactor: 2 });
   await page.setContent(html, { waitUntil: "networkidle0" });
   await page.evaluate(() => document.fonts.ready);
 
