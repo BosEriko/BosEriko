@@ -51,26 +51,6 @@ const renderPill = ([topic, count]) => {
     </span>`;
 };
 
-const renderCard = async (label, repo) => {
-  if (!repo) return "";
-
-  const cover = await resolveCover(repo);
-  return `
-    <div class="card">
-      <p class="eyebrow">Latest ${label}</p>
-      <div class="window">
-        <div class="bar">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot brand"></span>
-          <span class="label">${escapeHtml(repo.full_name.toLowerCase())}</span>
-        </div>
-        <div class="cover"><img src="${escapeHtml(cover)}" alt="" /></div>
-      </div>
-      <h2>${escapeHtml(repo.name)}</h2>
-    </div>`;
-};
-
 const truncate = (text, length) => (text.length > length ? `${text.slice(0, length).trimEnd()}…` : text);
 
 const renderRepoGrid = async (items) => {
@@ -169,10 +149,8 @@ async function main() {
     fetchLatestRepos("product", 3),
     fetchLatestRepos("project", 3),
   ]);
-  const [product, project] = [products[0], projects[0]];
 
   const pills = Object.entries(counts).filter(([topic]) => topics[topic]).map(renderPill).join("");
-  const cards = (await Promise.all([renderCard("product", product), renderCard("project", project)])).join("");
 
   const today = new Date().toISOString().slice(0, 10);
 
@@ -212,17 +190,21 @@ async function main() {
   .pill { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 2px; padding: 5px 5px 5px 9px; font-family: var(--mono); font-size: 12px; color: var(--ink-soft); }
   .pill i { font-size: 14px; }
   .count { background: var(--paper-deep); border-radius: 2px; padding: 2px 6px; font-size: 10px; color: var(--muted); }
-  .cards { display: flex; gap: 32px; }
-  .card { width: 250px; }
-  .card .eyebrow { margin-bottom: 8px; }
-  .window { border: 2px solid var(--ink); border-radius: 2px; background: var(--ink); box-shadow: 8px 8px 0 var(--brand); }
-  .bar { display: flex; align-items: center; gap: 6px; padding: 8px 10px; }
-  .dot { width: 6px; height: 6px; background: rgb(246 241 231 / 0.25); }
-  .dot.brand { background: var(--brand); }
-  .label { margin-left: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; color: rgb(246 241 231 / 0.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .cover { aspect-ratio: 2 / 1; overflow: hidden; background: var(--paper-deep); }
-  .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  h2 { margin-top: 14px; font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .portrait { width: 240px; margin-right: 12px; border: 2px solid var(--ink); border-radius: 2px; background: var(--ink); box-shadow: 10px 10px 0 var(--brand); }
+  .bar { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(246 241 231 / 0.6); }
+  .live { display: flex; align-items: center; gap: 6px; color: var(--paper); }
+  .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #ef4444; }
+  .frame { position: relative; height: 200px; overflow: hidden; background: var(--paper-deep); }
+  .frame img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(40%); }
+  .frame::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgb(26 23 20 / 0.18) 0px, rgb(26 23 20 / 0.18) 1px, transparent 1px, transparent 3px); }
+  .corner { position: absolute; z-index: 1; width: 18px; height: 18px; border: 0 solid var(--brand); }
+  .corner.tl { top: 10px; left: 10px; border-top-width: 2px; border-left-width: 2px; }
+  .corner.tr { top: 10px; right: 10px; border-top-width: 2px; border-right-width: 2px; }
+  .corner.bl { bottom: 10px; left: 10px; border-bottom-width: 2px; border-left-width: 2px; }
+  .corner.br { bottom: 10px; right: 10px; border-bottom-width: 2px; border-right-width: 2px; }
+  .tag { position: absolute; z-index: 1; left: 0; bottom: 18px; display: flex; flex-direction: column; align-items: flex-start; }
+  .tag .name { background: var(--brand); padding: 3px 12px 3px 14px; font-family: var(--serif); font-size: 18px; line-height: 1.2; }
+  .tag .handle { background: var(--ink); padding: 4px 12px 4px 14px; font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--paper); }
   .footer { position: absolute; left: 0; right: 0; bottom: 0; height: 36px; padding: 0 56px; display: flex; align-items: center; justify-content: space-between; background: var(--ink); font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(246 241 231 / 0.6); }
   .footer strong { color: var(--brand); font-weight: 400; }
 </style>
@@ -242,7 +224,14 @@ async function main() {
       <p class="tagline">I&apos;m a software engineer who likes <span class="highlight">anime</span> and <span class="highlight">streaming</span>.</p>
       <div class="pills">${pills}</div>
     </div>
-    <div class="cards">${cards}</div>
+    <div class="portrait">
+      <div class="bar"><span class="live">On air</span><span>cam_01</span></div>
+      <div class="frame">
+        <img src="https://avatars.githubusercontent.com/${username}" alt="" />
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="tag"><span class="name">Bos Eriko</span><span class="handle">Software engineer &middot; @${username}</span></div>
+      </div>
+    </div>
     <div class="footer">
       <strong>boseriko.com</strong>
       <span>Updated ${today}</span>
