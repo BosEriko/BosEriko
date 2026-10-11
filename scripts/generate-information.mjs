@@ -71,32 +71,93 @@ const renderCard = async (label, repo) => {
     </div>`;
 };
 
-const renderRepoList = (repos) =>
-  repos
-    .map((repo) => `- **[${repo.name}](${repo.html_url})**${repo.description ? ` — ${escapeHtml(repo.description)}` : ""}`)
-    .join("\n");
+const truncate = (text, length) => (text.length > length ? `${text.slice(0, length).trimEnd()}…` : text);
 
-const renderReadme = (products, projects, today) => {
-  const topicLinks = Object.entries(counts)
-    .filter(([topic]) => topics[topic])
-    .map(([topic, count]) => `[${topics[topic].title}](https://boseriko.com/topic/${topic}) (${count})`)
-    .join(" · ");
+const renderRepoGrid = async (items) => {
+  const cells = await Promise.all(
+    items.map(async ({ repo, kind }) => {
+      const cover = await resolveCover(repo);
+      return `    <td width="33%" valign="top">
+      <a href="${repo.html_url}"><img src="${escapeHtml(cover)}" alt="${escapeHtml(repo.name)}" width="100%" /></a>
+      <br /><sub>${kind.toUpperCase()}</sub>
+      <br /><b><a href="${repo.html_url}">${escapeHtml(repo.name)}</a></b>${repo.description ? `
+      <br /><sub>${escapeHtml(truncate(repo.description, 120))}</sub>` : ""}
+    </td>`;
+    })
+  );
+
+  const rows = [];
+  for (let i = 0; i < cells.length; i += 3) {
+    const row = cells.slice(i, i + 3);
+    while (row.length < 3) row.push(`    <td width="33%"></td>`);
+    rows.push(`  <tr>\n${row.join("\n")}\n  </tr>`);
+  }
+
+  return `<table>\n${rows.join("\n")}\n</table>`;
+};
+
+async function resolveDevicon(deviconClass) {
+  const [name, variant] = deviconClass.replace(/^devicon-/, "").split(/-(?=[^-]+$)/);
+  const base = `https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/icons/${name}`;
+
+  for (const url of [`${base}/${name}-${variant}.svg`, `${base}/${name}-original.svg`]) {
+    const res = await fetch(url, { method: "HEAD" });
+    if (res.ok) return url;
+  }
+
+  return null;
+}
+
+const badge = (label, color, logo) =>
+  `https://img.shields.io/badge/${encodeURIComponent(label.replace(/-/g, "--"))}-${color.replace("#", "")}?style=for-the-badge&logo=${logo}&logoColor=white`;
+
+const socialLogos = { xtwitter: "x" };
+
+const renderReadme = async (products, projects, today) => {
+  const latestWork = [
+    ...products.map((repo) => ({ repo, kind: "product" })),
+    ...projects.map((repo) => ({ repo, kind: "project" })),
+  ].slice(0, Math.max(3, Math.floor((products.length + projects.length) / 3) * 3));
+
+  const topicIcons = (
+    await Promise.all(
+      Object.entries(counts)
+        .filter(([topic]) => topics[topic]?.deviconClass)
+        .map(async ([topic, count]) => {
+          const icon = await resolveDevicon(topics[topic].deviconClass);
+          const title = `${topics[topic].title} · ${count} ${count === 1 ? "repository" : "repositories"}`;
+          return icon && `<a href="https://boseriko.com/topic/${topic}" title="${escapeHtml(title)}"><img src="${icon}" alt="${escapeHtml(topics[topic].title)}" width="40" height="40" /></a>`;
+        })
+    )
+  )
+    .filter(Boolean)
+    .join("&nbsp;&nbsp;\n");
 
   const openSource = [
-    packages.length && `- **npm:** ${packages.map(({ name, link }) => `[${name}](${link})`).join(" · ")}`,
-    gems.length && `- **RubyGems:** ${gems.map(({ name, link }) => `[${name}](${link})`).join(" · ")}`,
-    contributions.length && `- **Contributions:** ${contributions.map(({ name, link, author }) => `[${author.name}/${name}](${link})`).join(" · ")}`,
-  ].filter(Boolean);
+    ...packages.map(({ name, link }) =>
+      `<a href="${link}"><img src="https://img.shields.io/npm/v/${name}?style=for-the-badge&logo=npm&label=${encodeURIComponent(name)}&color=1a1714" alt="${escapeHtml(name)}" /></a>`
+    ),
+    ...gems.map(({ name, link }) =>
+      `<a href="${link}"><img src="https://img.shields.io/gem/v/${name}?style=for-the-badge&logo=rubygems&label=${encodeURIComponent(name)}&color=1a1714" alt="${escapeHtml(name)}" /></a>`
+    ),
+    ...contributions.map(({ name, link, author }) =>
+      `<a href="${link}"><img src="${badge(`${author.name}/${name}`, "#1a1714", "github")}" alt="${escapeHtml(`${author.name}/${name}`)}" /></a>`
+    ),
+  ];
+
+  const socials = links.map(({ name, icon, url, color }) => {
+    const slug = icon.replace(/^fa/, "").toLowerCase();
+    return `<a href="${url}"><img src="${badge(name, color, socialLogos[slug] ?? slug)}" alt="${escapeHtml(name)}" /></a>`;
+  });
 
   const sections = [
     `<a href="https://boseriko.com"><img src="banner.png" alt="Bos Eriko — boseriko.com" /></a>`,
     `### Hey, I'm Bos Eriko`,
     `A software engineer who likes anime and streaming. See everything I build at **[boseriko.com](https://boseriko.com)** or read my **[resume](https://boseriko.com/resume)**.`,
-    products.length && `#### Latest products\n\n${renderRepoList(products)}`,
-    projects.length && `#### Latest projects\n\n${renderRepoList(projects)}`,
-    topicLinks && `#### Things I work with\n\n${topicLinks}`,
-    openSource.length && `#### Open source\n\n${openSource.join("\n")}`,
-    links.length && `#### Connect\n\n${links.map(({ name, url }) => `[${name}](${url})`).join(" · ")}`,
+    latestWork.length && `#### Latest work\n\n${await renderRepoGrid(latestWork)}`,
+    topicIcons && `#### Things I work with\n\n<p>\n${topicIcons}\n</p>`,
+    openSource.length && `#### Open source\n\n<p>\n${openSource.join("\n")}\n</p>`,
+    socials.length && `#### Connect\n\n<p>\n${socials.join("\n")}\n</p>`,
     `<sub>Updated weekly by GitHub Actions · ${today}</sub>`,
   ];
 
@@ -202,7 +263,7 @@ async function main() {
 
   console.log("Updated banner.png");
 
-  fs.writeFileSync("README.md", renderReadme(products, projects, today));
+  fs.writeFileSync("README.md", await renderReadme(products, projects, today));
   console.log("Updated README.md");
 }
 
