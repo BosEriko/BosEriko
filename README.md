@@ -1,4 +1,4 @@
-<a href="https://boseriko.com"><img src="banner.png" alt="Bos Eriko — boseriko.com" /></a>
+<a href="https://boseriko.com"><img src="github/banner.png" alt="Bos Eriko — boseriko.com" /></a>
 
 ### Hey, I'm Bos Eriko
 
