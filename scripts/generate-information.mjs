@@ -131,7 +131,7 @@ const renderReadme = async (products, projects, today) => {
   });
 
   const sections = [
-    `<a href="https://boseriko.com"><img src="banner.png" alt="Bos Eriko — boseriko.com" /></a>`,
+    `<a href="https://boseriko.com"><img src="github/banner.png" alt="Bos Eriko — boseriko.com" /></a>`,
     `### Hey, I'm Bos Eriko`,
     `A software engineer who likes anime and streaming. See everything I build at **[boseriko.com](https://boseriko.com)** or read my **[resume](https://boseriko.com/resume)**.`,
     latestWork.length && `#### Latest work\n\n${await renderRepoGrid(latestWork)}`,
@@ -247,10 +247,10 @@ async function main() {
   await page.evaluate(() => document.fonts.ready);
 
   const banner = await page.$("#banner");
-  await banner.screenshot({ path: "banner.png" });
+  await banner.screenshot({ path: "github/banner.png" });
   await browser.close();
 
-  console.log("Updated banner.png");
+  console.log("Updated github/banner.png");
 
   fs.writeFileSync("README.md", await renderReadme(products, projects, today));
   console.log("Updated README.md");
