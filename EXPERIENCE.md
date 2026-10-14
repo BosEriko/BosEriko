@@ -1,6 +1,6 @@
 # Experience
 
-Generated from `experience.json` for copying into LinkedIn. Hidden roles are excluded.
+My work history, from most recent to earliest.
 
 ## Full Stack Developer · ReferScout
 
