@@ -91,7 +91,7 @@ async function writeBanner() {
   }
   * { box-sizing: border-box; margin: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-  #banner { position: relative; width: 1400px; height: 350px; padding: 0 64px 36px 480px; display: flex; flex-direction: column; justify-content: center; background: var(--paper); overflow: hidden; }
+  #banner { position: relative; width: 1400px; height: 350px; padding: 0 64px 36px 460px; display: flex; flex-direction: column; justify-content: center; background: var(--paper); overflow: hidden; }
   .eyebrow { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
   .logo { width: 28px; height: 28px; }
   h1 { margin-top: 10px; font-family: var(--serif); font-weight: 400; font-size: 72px; line-height: 0.9; letter-spacing: -0.02em; }
@@ -102,15 +102,21 @@ async function writeBanner() {
   .pill { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 2px; padding: 5px 5px 5px 9px; font-family: var(--mono); font-size: 12px; color: var(--ink-soft); }
   .pill i { font-size: 14px; }
   .count { background: var(--paper-deep); border-radius: 2px; padding: 2px 6px; font-size: 10px; color: var(--muted); }
-  .scanlines { position: absolute; top: 0; left: 0; bottom: 36px; width: 400px; background: var(--paper-deep) repeating-linear-gradient(0deg, rgb(26 23 20 / 0.06) 0px, rgb(26 23 20 / 0.06) 1px, transparent 1px, transparent 4px); border-right: 2px solid var(--ink); }
-  .scanlines::after { content: ""; position: absolute; top: 0; right: -12px; bottom: 0; width: 10px; background: var(--brand); }
-  .footer { position: absolute; left: 0; right: 0; bottom: 0; height: 36px; padding: 0 64px; display: flex; align-items: center; justify-content: flex-end; gap: 24px; background: var(--ink); font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(246 241 231 / 0.6); }
+  .halo { position: absolute; left: 174px; top: 287px; border-radius: 50%; transform: translate(-50%, -50%); }
+  .halo.glow { width: 300px; height: 300px; background: var(--brand); }
+  .halo.ring { width: 360px; height: 360px; border: 2px solid var(--ink); }
+  .halo.dash { width: 430px; height: 430px; border: 2px dashed var(--line); }
+  .halo.scan { width: 560px; height: 560px; background: repeating-linear-gradient(0deg, rgb(26 23 20 / 0.06) 0px, rgb(26 23 20 / 0.06) 1px, transparent 1px, transparent 4px); -webkit-mask: radial-gradient(circle, #000 40%, transparent 70%); }
+  .footer { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 36px; padding: 0 64px; display: flex; align-items: center; justify-content: flex-end; gap: 24px; background: var(--ink); font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(246 241 231 / 0.6); }
   .footer strong { color: var(--brand); font-weight: 400; }
 </style>
 </head>
 <body>
   <div id="banner">
-    <div class="scanlines"></div>
+    <div class="halo scan"></div>
+    <div class="halo dash"></div>
+    <div class="halo ring"></div>
+    <div class="halo glow"></div>
     <p class="eyebrow">
       <svg class="logo" viewBox="0 0 16 16" shape-rendering="crispEdges">
         <rect width="16" height="16" rx="2" fill="#1a1714"/>
