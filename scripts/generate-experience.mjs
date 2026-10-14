@@ -35,7 +35,7 @@ function main() {
 
   const markdown = [
     `# Experience`,
-    `Generated from \`experience.json\` for copying into LinkedIn. Hidden roles are excluded.`,
+    `My work history, from most recent to earliest.`,
     ...roles.map(renderRole),
     `<sub>Updated weekly by GitHub Actions · ${today}</sub>`,
   ].join("\n\n");
