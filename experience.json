@@ -1,5 +1,22 @@
 [
   {
+    "position": "Co-Founder",
+    "company": "Polsar",
+    "date": {
+      "start": 1792022400000,
+      "end": null
+    },
+    "location": "Remote",
+    "active": true,
+    "hidden": true,
+    "responsibilities": [
+      "Maintained and enhanced a NestJS back-end application.",
+      "Built and optimized a NextJS front-end interface for seamless usability.",
+      "Integrated APIs to ensure smooth data communication between front-end and back-end.",
+      "Conducted code reviews and implemented best practices for scalability."
+    ]
+  },
+  {
     "position": "Software Engineer",
     "company": "Uni-Tech",
     "date": {
