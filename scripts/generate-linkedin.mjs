@@ -36,13 +36,12 @@ const renderRole = ({ position, company, date, location, active, responsibilitie
   ].join("\n\n");
 };
 
-const renderPill = ([topic, count]) => {
+const renderPill = ([topic]) => {
   const deviconClass = topics[topic]?.deviconClass;
   return `
     <span class="pill">
       ${deviconClass ? `<i class="${escapeHtml(deviconClass)}"></i>` : ""}
       <span>${escapeHtml(topic)}</span>
-      <span class="count">${count}</span>
     </span>`;
 };
 
@@ -99,9 +98,8 @@ async function writeBanner() {
   .tagline { margin-top: 10px; font-size: 18px; line-height: 1.5; color: var(--ink-soft); }
   .highlight { color: var(--ink); background: linear-gradient(transparent 58%, var(--brand) 58%, var(--brand) 92%, transparent 92%); padding: 0 0.1em; }
   .pills { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
-  .pill { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 2px; padding: 5px 5px 5px 9px; font-family: var(--mono); font-size: 12px; color: var(--ink-soft); }
+  .pill { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 2px; padding: 7px 10px; font-family: var(--mono); font-size: 12px; color: var(--ink-soft); }
   .pill i { font-size: 14px; }
-  .count { background: var(--paper-deep); border-radius: 2px; padding: 2px 6px; font-size: 10px; color: var(--muted); }
   .scan { position: absolute; top: 0; left: 0; bottom: 36px; width: 560px; background: repeating-linear-gradient(0deg, rgb(26 23 20 / 0.06) 0px, rgb(26 23 20 / 0.06) 1px, transparent 1px, transparent 4px); -webkit-mask: linear-gradient(90deg, #000 30%, transparent); }
   .footer { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 36px; padding: 0 64px; display: flex; align-items: center; justify-content: flex-end; gap: 24px; background: var(--ink); font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(246 241 231 / 0.6); }
   .footer strong { color: var(--brand); font-weight: 400; }
