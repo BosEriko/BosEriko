@@ -100,5 +100,11 @@
     "description": "Repositories related to Firebase.",
     "deviconClass": "devicon-firebase-plain",
     "bg": "#F59E0B"
+  },
+  "rust": {
+    "title": "Rust",
+    "description": "Repositories related to Rust.",
+    "deviconClass": "devicon-rust-original",
+    "bg": "#EA580C"
   }
 }
