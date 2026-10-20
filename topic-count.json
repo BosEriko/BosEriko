@@ -6,5 +6,6 @@
   "docker": 2,
   "tailwind": 2,
   "firebase": 2,
-  "graphql": 1
+  "graphql": 1,
+  "rust": 1
 }
