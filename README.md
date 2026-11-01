@@ -15,16 +15,16 @@ A software engineer who likes anime and streaming. See everything I build at **[
       <br /><sub>A private all-in-one app for health, journaling, and personal finance. Track weight, water, food, blood pressure, and ha…</sub>
     </td>
     <td width="33%" valign="top">
+      <a href="https://github.com/BosEriko/library"><img src="https://raw.githubusercontent.com/BosEriko/library/main/COVER.png" alt="library" width="100%" /></a>
+      <br /><sub>PROJECT</sub>
+      <br /><b><a href="https://github.com/BosEriko/library">library</a></b>
+      <br /><sub>Search anime, manga and games from one place and open any title as a full profile. Every result shares the same schema a…</sub>
+    </td>
+    <td width="33%" valign="top">
       <a href="https://github.com/BosEriko/boseriko.com"><img src="https://raw.githubusercontent.com/BosEriko/boseriko.com/main/COVER.png" alt="boseriko.com" width="100%" /></a>
       <br /><sub>PROJECT</sub>
       <br /><b><a href="https://github.com/BosEriko/boseriko.com">boseriko.com</a></b>
       <br /><sub>Personal website and portfolio of Bos Eriko. Products, projects, and topics are pulled automatically from GitHub. Blog p…</sub>
-    </td>
-    <td width="33%" valign="top">
-      <a href="https://github.com/BosEriko/bostris"><img src="https://raw.githubusercontent.com/BosEriko/bostris/main/COVER.png" alt="bostris" width="100%" /></a>
-      <br /><sub>PROJECT</sub>
-      <br /><b><a href="https://github.com/BosEriko/bostris">bostris</a></b>
-      <br /><sub>A fast, polished falling-block puzzle game that runs entirely in the terminal. Built in Rust with Ratatui and Crossterm.…</sub>
     </td>
   </tr>
 </table>
@@ -66,4 +66,4 @@ A software engineer who likes anime and streaming. See everything I build at **[
 <a href="https://steamcommunity.com/id/BosEriko/"><img src="https://img.shields.io/badge/Steam-00adee?style=for-the-badge&logo=steam&logoColor=white" alt="Steam" /></a>
 </p>
 
-<sub>Updated weekly by GitHub Actions · 2026-10-25</sub>
+<sub>Updated weekly by GitHub Actions · 2026-11-01</sub>
