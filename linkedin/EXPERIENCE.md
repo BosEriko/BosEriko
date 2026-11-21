@@ -86,4 +86,4 @@ My work history, from most recent to earliest.
 • Maintained Talkpush's website using Dokku.
 ```
 
-<sub>Updated weekly by GitHub Actions · 2026-11-14</sub>
+<sub>Updated weekly by GitHub Actions · 2026-11-21</sub>
