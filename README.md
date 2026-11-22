@@ -66,4 +66,4 @@ A software engineer who likes anime and streaming. See everything I build at **[
 <a href="https://steamcommunity.com/id/BosEriko/"><img src="https://img.shields.io/badge/Steam-00adee?style=for-the-badge&logo=steam&logoColor=white" alt="Steam" /></a>
 </p>
 
-<sub>Updated weekly by GitHub Actions · 2026-11-15</sub>
+<sub>Updated weekly by GitHub Actions · 2026-11-22</sub>
